@@ -5,7 +5,7 @@ import { PlatformCard } from "@/components/PlatformCard"
 import { usePlatforms } from "@/hooks/usePlatforms"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Typography, Spin, Alert } from "antd"
-import { useTheme, ThemeProvider } from "@/providers/theme-provider"
+// import { useTheme, ThemeProvider } from "@/providers/theme-provider"
 import { Platform } from "@/hooks/usePlatforms"
 import styles from '@/styles/Layout.module.css'
 
@@ -13,7 +13,7 @@ const { Title, Paragraph } = Typography
 const queryClient = new QueryClient()
 
 function Home() {
-  const { theme } = useTheme()
+  // const { theme } = useTheme()
   const { data: platforms, isLoading, error } = usePlatforms()
 
   if (isLoading) {
@@ -47,7 +47,7 @@ function Home() {
             Welcome to PPIC Platforms
           </Title>
           <Paragraph className={styles.description}>
-            Your centralized gateway to PPIC's digital ecosystem. Seamlessly navigate and access enterprise services through our secure, integrated dashboard experience.
+            Your centralized gateway to PPIC&apos;s digital ecosystem. Seamlessly navigate and access enterprise services through our secure, integrated dashboard experience.
           </Paragraph>
         </div>
 

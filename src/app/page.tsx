@@ -5,7 +5,7 @@ import { PlatformCard } from "@/components/PlatformCard"
 import { usePlatforms } from "@/hooks/usePlatforms"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Typography, Spin, Alert } from "antd"
-// import { useTheme, ThemeProvider } from "@/providers/theme-provider"
+import { ThemeProvider } from "@/providers/theme-provider"
 import { Platform } from "@/hooks/usePlatforms"
 import styles from '@/styles/Layout.module.css'
 

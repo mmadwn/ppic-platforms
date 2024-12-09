@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState, createRef } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { ConfigProvider, theme } from 'antd'
 
 type Theme = 'light' | 'dark'
@@ -12,26 +12,14 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export function ThemeProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [currentTheme, setCurrentTheme] = useState<Theme>('light')
   const [mounted, setMounted] = useState(false)
-  const providerRef = createRef<HTMLDivElement>()
 
   useEffect(() => {
     setMounted(true)
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    setCurrentTheme(mediaQuery.matches ? 'dark' : 'light')
-
-    const handler = (e: MediaQueryListEvent) => {
-      setCurrentTheme(e.matches ? 'dark' : 'light')
-    }
-
-    mediaQuery.addEventListener('change', handler)
-    return () => mediaQuery.removeEventListener('change', handler)
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    setCurrentTheme(prefersDark ? 'dark' : 'light')
   }, [])
 
   useEffect(() => {
@@ -45,9 +33,7 @@ export function ThemeProvider({
     setCurrentTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
   }
 
-  if (!mounted) {
-    return null
-  }
+  if (!mounted) return null
 
   return (
     <ThemeContext.Provider value={{ theme: currentTheme, toggleTheme }}>
@@ -55,12 +41,12 @@ export function ThemeProvider({
         theme={{
           algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
           token: {
-            colorPrimary: currentTheme === 'light' ? 'var(--primary)' : '#1a365d',
+            colorPrimary: 'var(--header)',
             borderRadius: 8,
           },
         }}
       >
-        <div ref={providerRef}>
+        <div className="min-h-screen bg-background">
           {children}
         </div>
       </ConfigProvider>

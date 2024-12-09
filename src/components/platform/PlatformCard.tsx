@@ -1,30 +1,15 @@
 import { Card, Tag } from "antd"
 import Image from "next/image"
 import Link from "next/link"
-import { useTheme } from "@/providers/theme-provider"
-import styles from '@/styles/Card.module.css'
+import { useTheme } from "@/providers/themeProvider"
+import styles from './Card.module.css'
 import { Platform } from "@/types"
-
+import { getStatusColor } from "@/utils/platform-utils"
 const { Meta } = Card
 
 export function PlatformCard({ title, description, imageSrc, href, status }: Platform) {
   const { theme } = useTheme()
-
-  const getStatusColor = (status: string) => {
-    if (theme === 'dark') {
-      switch (status) {
-        case 'active':
-          return '#4ADE80'
-        case 'maintenance':
-          return '#FBBF24' 
-        case 'coming soon':
-          return '#60A5FA'
-        default:
-          return '#94A3B8'
-      }
-    }
-    return status === 'active' ? 'success' : status === 'maintenance' ? 'warning' : 'processing'
-  }
+  const statusColor = getStatusColor(status, theme);
 
   return (
     <Link href={href} className={styles.cardContainer}>
@@ -43,25 +28,23 @@ export function PlatformCard({ title, description, imageSrc, href, status }: Pla
         }
         className={styles.card}
         style={{
-          backgroundColor: theme === 'dark' ? 'rgba(17, 24, 39, 0.8)' : 'rgba(255, 255, 255, 0.8)',
-          backdropFilter: 'blur(8px)',
+          backgroundColor: theme === 'dark' ? '#141F2E' : '#ffffff',
+          backdropFilter: 'blur(12px)',
           borderRadius: '12px',
+          border: `1px solid ${theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
         }}
       >
         <Meta
-          title={
-            <h3 className={styles.title}>
-              {title}
-            </h3>
-          }
+          title={<h3 className={styles.title}>{title}</h3>}
           description={
             <div className={styles.contentWrapper}>
-              <p className={styles.description}>
-                {description}
-              </p>
+              <p className={styles.description}>{description}</p>
               <Tag 
-                color={getStatusColor(status)}
+                color={statusColor}
                 className={styles.tag}
+                style={{
+                  boxShadow: `0 0 12px ${statusColor}25`,
+                }}
               >
                 {status}
               </Tag>

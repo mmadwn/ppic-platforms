@@ -1,21 +1,63 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
-  --primary: #E52526;
-  --secondary: #0f1b2a
+  --header: #E52526;
+  --background: #ffffff;
+  --foreground: #141F2E;
+  --status-active: #22C55E;
+  --status-maintenance: #EAB308;
+  --status-coming-soon: #3B82F6;
+  --status-default: #94A3B8;
+  --max-width: 80rem; /* 1280px */
+  --container-padding: 1rem;
+  --header-border: rgba(0, 0, 0, 0.1);
+  --header-text: var(--foreground);
+  --switch-bg: rgba(128, 128, 128, 0.2);
+  --switch-hover: rgba(128, 128, 128, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --header: #141F2E;
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --status-active: #16A34A;
+  --status-maintenance: #CA8A04;
+  --status-coming-soon: #2563EB;
+  --status-default: #64748B;
+  --header-border: rgba(255, 255, 255, 0.1);
+  --header-text: var(--foreground);
+  --switch-bg: rgba(255, 255, 255, 0.1);
+  --switch-hover: rgba(255, 255, 255, 0.2);
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
   color: var(--foreground);
-  background: var(--background);
-  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.relative {
+  position: relative;
 }

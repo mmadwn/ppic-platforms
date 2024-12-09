@@ -1,12 +1,12 @@
 'use client'
 
-import Header from "@/components/Header"
-import { PlatformCard } from "@/components/PlatformCard"
+import Header from "@/layouts/Header"
+import { PlatformCard } from "@/components/platform/PlatformCard"
 import { usePlatforms } from "@/hooks/usePlatforms"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Typography, Spin, Alert } from "antd"
 import { ThemeProvider } from "@/providers/theme-provider"
-import { Platform } from "@/hooks/usePlatforms"
+import { Platform } from "@/types"
 import styles from '@/styles/Layout.module.css'
 
 const { Title, Paragraph } = Typography
@@ -41,7 +41,6 @@ function Home() {
     <main className="min-h-screen relative">
       <div className={styles.container}>
         <Header />
-        
         <div className={styles.heroSection}>
           <Title level={1} className={styles.title}>
             Welcome to PPIC Platforms
@@ -55,6 +54,7 @@ function Home() {
           {platforms?.map((platform: Platform) => (
             <PlatformCard
               key={platform.id}
+              id={platform.id}
               title={platform.title}
               description={platform.description}
               imageSrc={platform.imageSrc}

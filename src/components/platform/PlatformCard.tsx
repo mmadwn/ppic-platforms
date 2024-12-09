@@ -3,18 +3,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { useTheme } from "@/providers/theme-provider"
 import styles from '@/styles/Card.module.css'
+import { Platform } from "@/types"
 
 const { Meta } = Card
 
-interface PlatformCardProps {
-  title: string
-  description: string
-  imageSrc: string
-  href: string
-  status: 'active' | 'maintenance' | 'coming soon'
-}
-
-export function PlatformCard({ title, description, imageSrc, href, status }: PlatformCardProps) {
+export function PlatformCard({ title, description, imageSrc, href, status }: Platform) {
   const { theme } = useTheme()
 
   const getStatusColor = (status: string) => {

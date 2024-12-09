@@ -1,13 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-
-export interface Platform {
-  id: string
-  title: string
-  description: string
-  imageSrc: string
-  href: string
-  status: 'active' | 'maintenance' | 'coming soon'
-}
+import { Platform } from "@/types"
 
 async function fetchPlatforms(): Promise<Platform[]> {
   return [

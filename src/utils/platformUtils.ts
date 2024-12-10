@@ -1,7 +1,6 @@
 import type { Platform } from '@/types';
-import type { ThemeMode } from '@/config/theme';
 
-export const getStatusColor = (status: Platform['status'], theme: ThemeMode) => {
+export const getStatusColor = (status: Platform['status']) => {
   switch (status) {
     case 'active':
       return 'success';

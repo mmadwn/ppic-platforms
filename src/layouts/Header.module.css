@@ -1,63 +1,89 @@
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  background-color: var(--header);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-}
-
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0.75rem var(--container-padding);
-}
-
 .wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+  gap: var(--spacing-md);
+  height: 100%;
+  padding: 0 var(--spacing-md);
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
+  gap: var(--spacing-sm);
   text-decoration: none;
-  transition: opacity 0.3s ease;
+  color: var(--foreground);
+  transition: var(--transition);
+  padding: var(--spacing-xs) 0;
 }
 
 .brand:hover {
-  opacity: 0.8;
+  opacity: 0.9;
+  color: var(--primary);
+}
+
+.logoContainer {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
 
 .logo {
-  width: 2rem;
-  height: 2rem;
+  object-fit: contain;
 }
 
 .brandText {
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+  transition: var(--transition);
+  letter-spacing: -0.02em;
 }
 
 .themeSwitch {
-  background-color: rgba(128, 128, 128, 0.2);
-  transition: background-color 0.3s ease;
+  position: relative;
+  min-width: 48px;
+  height: 24px;
+  padding: 0;
+  border-radius: var(--radius-full);
+  background-color: var(--secondary) !important;
 }
 
-.themeSwitch:hover {
-  background-color: rgba(128, 128, 128, 0.3);
+.themeSwitch:global(.ant-switch-checked) {
+  background-color: var(--primary) !important;
 }
 
-/* Dark theme specific styles */
-:global(.dark) .themeSwitch {
-  background-color: rgba(255, 255, 255, 0.1);
+/* Animation for theme switch */
+.themeSwitch :global(.ant-switch-handle) {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 20px !important;
+  height: 20px !important;
+  top: 2px !important;
 }
 
-:global(.dark) .themeSwitch:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-} 
+.themeSwitch:global(.ant-switch-checked) :global(.ant-switch-handle) {
+  inset-inline-start: calc(100% - 22px) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .brandText {
+    font-size: 1.125rem;
+  }
+  
+  .logoContainer {
+    width: 32px;
+    height: 32px;
+  }
+}

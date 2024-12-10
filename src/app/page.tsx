@@ -1,12 +1,13 @@
 'use client'
 
 import Header from "@/layouts/Header"
+import Footer from "@/layouts/Footer"
 import { PlatformCard } from "@/components/platform/PlatformCard"
 import { usePlatforms } from "@/hooks/usePlatforms"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { Typography, Spin, Alert } from "antd"
 import { ThemeProvider } from "@/providers/themeProvider"
-import styles from '@/styles/Layout.module.css'
+
 const { Title, Paragraph } = Typography
 const queryClient = new QueryClient()
 
@@ -37,28 +38,31 @@ function Home() {
   }
 
   return (
-    <main className="min-h-screen relative bg-background text-foreground">
-      <div className={styles.container}>
-        <Header />
-        <div className={styles.heroSection}>
-          <Title level={1} className="text-foreground">
-            Welcome to PPIC Platforms
-          </Title>
-          <Paragraph className="text-foreground/80">
-            Your centralized gateway to PPIC&apos;s digital ecosystem. Seamlessly navigate and access enterprise services through our secure, integrated dashboard experience.
-          </Paragraph>
-        </div>
+    <div className="page-container">
+      <Header />
+      <main className="main-content">
+        <div className="layout-container">
+          <div className="hero-section">
+            <Title level={1} className="hero-title">
+              Welcome to PPIC Platforms
+            </Title>
+            <Paragraph className="hero-description">
+              Your centralized gateway to PPIC&apos;s digital ecosystem. Seamlessly navigate and access enterprise services through our secure, integrated dashboard experience.
+            </Paragraph>
+          </div>
 
-        <div className={styles.cardGrid}>
-          {platforms?.map((platform) => (
-            <PlatformCard
-              key={platform.id}
-              {...platform}
-            />
-          ))}
+          <div className="card-grid">
+            {platforms?.map((platform) => (
+              <PlatformCard
+                key={platform.id}
+                {...platform}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </div>
   )
 }
 

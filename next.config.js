@@ -8,6 +8,10 @@ const nextConfig = {
       },
     ],
   },
-};
+  webpack: (config) => {
+    config.optimization.moduleIds = 'deterministic';
+    return config;
+  },
+}
 
-export default nextConfig;
+module.exports = nextConfig 

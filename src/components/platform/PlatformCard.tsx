@@ -4,21 +4,21 @@ import Link from "next/link"
 import { useTheme } from "@/providers/themeProvider"
 import styles from './Card.module.css'
 import { Platform } from "@/types"
-import { getStatusColor } from "@/utils/platform-utils"
+import { getStatusColor } from "@/utils/platformUtils"
 const { Meta } = Card
 
-export function PlatformCard({ title, description, imageSrc, href, status }: Platform) {
+export function PlatformCard({ title, description, img_url, index_url, status }: Platform) {
   const { theme } = useTheme()
-  const statusColor = getStatusColor(status, theme);
+  const statusColor = getStatusColor(status);
 
   return (
-    <Link href={href} className={styles.cardContainer}>
+    <Link href={index_url} className={styles.cardContainer}>
       <Card
         hoverable
         cover={
           <div className={styles.imageContainer}>
             <Image
-              src={imageSrc}
+              src={img_url}
               alt={title}
               fill
               style={{ objectFit: 'cover' }}
@@ -27,30 +27,28 @@ export function PlatformCard({ title, description, imageSrc, href, status }: Pla
           </div>
         }
         className={styles.card}
-        style={{
-          backgroundColor: theme === 'dark' ? '#141F2E' : '#ffffff',
-          backdropFilter: 'blur(12px)',
-          borderRadius: '12px',
-          border: `1px solid ${theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`,
+        styles={{
+          body: {
+            flex: 1,
+            height: '100%',
+            padding: 0,
+            backgroundColor: theme === 'dark' ? '#141F2E' : '#ffffff',
+            borderRadius: '12px',
+          }
         }}
       >
-        <Meta
-          title={<h3 className={styles.title}>{title}</h3>}
-          description={
-            <div className={styles.contentWrapper}>
-              <p className={styles.description}>{description}</p>
-              <Tag 
-                color={statusColor}
-                className={styles.tag}
-                style={{
-                  boxShadow: `0 0 12px ${statusColor}25`,
-                }}
-              >
-                {status}
-              </Tag>
-            </div>
-          }
-        />
+        <div className={styles.contentWrapper}>
+          <div className={styles.header}>
+            <h3 className={styles.title}>{title}</h3>
+            <span 
+              className={styles.tag}
+              data-status={status}
+            >
+              {status}
+            </span>
+          </div>
+          <p className={styles.description}>{description}</p>
+        </div>
       </Card>
     </Link>
   )

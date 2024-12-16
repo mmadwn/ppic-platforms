@@ -10,7 +10,7 @@ interface ApiResponse {
 async function fetchPlatforms(): Promise<Platform[]> {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL_DEV}/api/portal/platforms`, {
     headers: {
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NTcsImVtYWlsIjoic3VwZXJhZG1pbkBzZWdpdGlnYW1lcmFoLmNvbSIsImlhdCI6MTczMzgxNjMwMCwiZXhwIjoxNzMzOTAyNzAwfQ.8ct9XwZKN1y3F8MhbjokwrpDesKbf5UJu5UIZh4rivs',
+      'Authorization': '',
       'Content-Type': 'application/json',
     },
   })
